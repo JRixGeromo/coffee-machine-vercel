@@ -26,11 +26,21 @@ docker-compose -f docker-compose.dev.yml up --build
 # Open http://localhost:3001
 ```
 
-### **Option 3: Vercel Deploy**
+### **Option 3: Supabase + Vercel (Cloud Production)**
 ```bash
-# Deploy to cloud (no Docker needed)
+# 1. Create Supabase project at https://supabase.com
+# 2. Get your credentials (see SUPABASE_SETUP.md)
+# 3. Update .env.local with Supabase credentials
+# 4. Run migrations
+npx prisma db push
+
+# 5. Deploy to Vercel
 npx vercel --prod
+
+# Access your live app at: https://your-app.vercel.app
 ```
+
+**📖 Full Supabase Setup Guide**: [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)
 
 ## 📖 What This App Does
 
@@ -164,20 +174,30 @@ npx vercel --prod # Deploy to Vercel
 
 ## 🌐 Deployment Options
 
-### 1. Vercel + Supabase (Recommended)
-- **Cost**: ~$10-15/year
-- **Features**: Auto-scaling, CDN, SSL, managed database
-- **Setup**: One-click deployment
+### 1. 🐳 Docker + Local PostgreSQL (Current Setup)
+- **Cost**: Free
+- **Features**: Full local development, no external dependencies
+- **Setup**: `docker-compose -f docker-compose.dev.yml up --build`
+- **Access**: http://localhost:3001
+- **Best for**: Development, testing, learning
 
-### 2. Docker + Cloud Server
+### 2. ☁️ Vercel + Supabase (Production - Recommended)
+- **Cost**: ~$10-15/year (both free tiers available)
+- **Features**: Auto-scaling, CDN, SSL, managed database, global deployment
+- **Setup**: See [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)
+- **Best for**: Production, hobby projects, portfolios
+
+### 3. 🚀 Hybrid (Local Dev + Supabase Database)
+- **Cost**: Free (Supabase free tier)
+- **Features**: Local development with cloud database
+- **Setup**: Update `.env.local` with Supabase credentials
+- **Best for**: Testing Supabase integration locally
+
+### 4. 🖥️ Docker + Cloud Server (Self-hosted)
 - **Cost**: ~$5-20/month
 - **Features**: Full control, custom domain, SSL
-- **Setup**: Manual configuration
-
-### 3. Local Docker
-- **Cost**: Free
-- **Features**: Development, testing, demo
-- **Setup**: Local machine
+- **Setup**: Deploy Docker containers to VPS
+- **Best for**: Enterprise, custom requirements
 
 ## 🔧 Configuration
 
