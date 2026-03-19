@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "buildCommand": "prisma generate && npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "NEXTAUTH_URL": "@nextauth_url",
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "DATABASE_URL": "@database_url"
+  },
+  "build": {
+    "env": {
+      "PRISMA_GENERATE_DATAPROXY": "true"
+    }
+  },
+  "functions": {
+    "app/api/coffee-machine/status/route.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "app/api/coffee-machine/make-espresso/route.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "app/api/coffee-machine/make-double-espresso/route.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "app/api/coffee-machine/make-americano/route.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "app/api/coffee-machine/fill-water/route.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "app/api/coffee-machine/fill-coffee/route.ts": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}

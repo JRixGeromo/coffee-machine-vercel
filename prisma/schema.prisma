@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CoffeeMachineState {
+  id          Int      @id @default(autoincrement())
+  waterMl     Int      @default(0)
+  coffeeGrams Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("coffee_machine_state")
+}
+
+model CoffeeRecipe {
+  id              Int      @id @default(autoincrement())
+  key             String   @unique
+  name            String
+  coffeeGrams     Float
+  waterMilliliters Int
+  description     String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("coffee_recipes")
+}
